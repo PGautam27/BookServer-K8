@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookserver
+  labels:
+    app: bookserver
+spec:
+  replicas: 1  # You can scale this as needed
+  selector:
+    matchLabels:
+      app: bookserver
+  template:
+    metadata:
+      labels:
+        app: bookserver
+    spec:
+      containers:
+        - name: bookserver
+          image: pgautam27/webookserver:v1.0  # Replace with the actual image name
+          ports:
+            - containerPort: 3001
+          env:
+            - name: MONGO_URI
+              value: "mongodb+srv://gautam:appu@cluster0.dbs5z.mongodb.net/"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookserver-service
+spec:
+  selector:
+    app: bookserver
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001
+  clusterIP: None  
