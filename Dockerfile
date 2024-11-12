@@ -20,4 +20,4 @@ EXPOSE 3001
 ENV PORT=3001
 
 # Step 8: Start the server
-CMD ["node", "server.js"]
+CMD ["node", "bookserver.js"]
